@@ -19,9 +19,10 @@ Screenshots:
 <img src="image1.jpg" width="22.5%" />
   <img src="image2.jpg" width="22.5%" />
   <img src="image3.jpg" width="22.5%" />
-  <img src="image4.jpg" width="33.3%" />
-  <img src="image5.jpg" width="33.3%" />
-  <img src="image6.jpg" width="33.3%" />
+  <img src="image4.jpg" width="22.5%" />
+  <img src="image5.jpg" width="22.5%" />
+  <img src="image6.jpg" width="22.5%" />
+  <img src="image7.jpg" width="22.5%" />
 </p>
 
 
