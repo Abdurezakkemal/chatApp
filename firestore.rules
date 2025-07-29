@@ -1,0 +1,62 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // HELPER FUNCTIONS
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isUser(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // Check if the user is a member of a given chat.
+    function isChatMember(chatId) {
+      // Check existence of chat doc and that the user is in the members map.
+      return isAuthenticated() && 
+             exists(/databases/$(database)/documents/chats/$(chatId)) && 
+             get(/databases/$(database)/documents/chats/$(chatId)).data.members[request.auth.uid] == true;
+    }
+
+    // USERS COLLECTION
+    match /users/{userId} {
+      // Allow any authenticated user to list all users (for creating new chats, etc.)
+      allow list: if isAuthenticated();
+
+      // Any authenticated user can read public user profiles (for user lists, etc.).
+      allow read: if isAuthenticated();
+      
+      // A user can only create their own document (on signup).
+      allow create: if isUser(userId);
+      
+      // A user can only update their own profile.
+      allow update: if isUser(userId);
+      
+      // Users cannot delete their own profiles.
+      allow delete: if false;
+    }
+
+    // CHATS COLLECTION
+    match /chats/{chatId} {
+      // Allow read and update access only to members of the chat.
+      allow read, update: if isChatMember(chatId);
+      
+      // Allow any authenticated user to create a new chat, as long as they include themselves as a member.d
+      allow create: if isAuthenticated() && request.resource.data.members[request.auth.uid] == true;
+
+      // MESSAGES SUBCOLLECTION
+      match /messages/{messageId} {
+        // Allow read access only to members of the parent chat.
+        allow read: if isChatMember(chatId);
+        
+        // Allow message creation only by the authenticated sender who is also a member of the chat.
+        allow create: if isChatMember(chatId) && request.resource.data.senderId == request.auth.uid;
+        
+        // Messages are immutable and cannot be updated or deleted.
+        allow update, delete: if false;
+      }
+    }
+  }
+}

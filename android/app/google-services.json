@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "547097392425",
+    "project_id": "wegechat-4439a",
+    "storage_bucket": "wegechat-4439a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:547097392425:android:6ffd697037e9ca3ec93338",
+        "android_client_info": {
+          "package_name": "com.example.testnew"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClZif4xtsk00497kmcKHIMJhUPRrnGSPM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

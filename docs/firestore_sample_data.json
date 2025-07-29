@@ -1,0 +1,87 @@
+{
+  "users": {
+    "user1": {
+      "name": "John",
+      "email": "john@test.com",
+      "phone": "+123456789",
+      "photoUrl": "",
+      "status": "Available",
+      "lastSeen": "2025-01-22T15:00:00Z",
+      "settings": {
+        "notifications": true,
+        "readReceipts": true,
+        "theme": "light"
+      }
+    },
+    "user2": {
+      "name": "Jane",
+      "email": "jane@test.com",
+      "phone": "+987654321",
+      "photoUrl": "",
+      "status": "Busy",
+      "lastSeen": "2025-01-22T14:30:00Z",
+      "settings": {
+        "notifications": true,
+        "readReceipts": false,
+        "theme": "dark"
+      }
+    }
+  },
+
+  "chats": {
+    "chat1": {
+      "isGroup": false,
+      "members": ["user1", "user2"],
+      "lastMessage": "Hello!",
+      "lastMessageTime": "2025-01-22T15:00:00Z",
+      "unreadCounts": {
+        "user1": 0,
+        "user2": 1
+      },
+      "createdAt": "2025-01-22T10:00:00Z"
+    },
+    "chat2": {
+      "isGroup": true,
+      "members": ["user1", "user2"],
+      "groupName": "Test Group",
+      "groupPhoto": "",
+      "lastMessage": "Hi everyone!",
+      "lastMessageTime": "2025-01-22T14:00:00Z",
+      "unreadCounts": {
+        "user1": 2,
+        "user2": 0
+      },
+      "createdAt": "2025-01-22T09:00:00Z"
+    }
+  },
+
+  "SUBCOLLECTIONS_STRUCTURE": {
+    "messages_path": "chats/{chatId}/messages/{messageId}",
+    "contacts_path": "users/{userId}/contacts/{contactId}",
+    "notifications_path": "users/{userId}/notifications/{notificationId}"
+  },
+
+  "SAMPLE_SUBCOLLECTION_DATA": {
+    "message1": {
+      "senderId": "user1",
+      "text": "Hello!",
+      "type": "text",
+      "timestamp": "2025-01-22T15:00:00Z",
+      "seenBy": ["user1"],
+      "reactions": {}
+    },
+    "contact1": {
+      "userId": "user2",
+      "name": "Jane",
+      "status": "Busy",
+      "addedAt": "2025-01-22T10:00:00Z"
+    },
+    "notification1": {
+      "type": "new_message",
+      "message": "New message from Jane",
+      "chatId": "chat1",
+      "createdAt": "2025-01-22T15:00:00Z",
+      "read": false
+    }
+  }
+}
